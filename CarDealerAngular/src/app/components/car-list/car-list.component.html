@@ -1,0 +1,18 @@
+<br>
+<div class="row">
+  <button class="btn btn-primary" routerLink="/car/create" [routerLinkActive]="['active']" href="#">New Car</button>
+</div>
+<br>
+<div class="row">
+  <div class="col-xs-12">
+    <a href="#" class="list-group-item clearfix" *ngFor="let car of cars">
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">{{ car.chassisNumber }}</h4>
+        <p class="list-group-item-text">{{ car.brand }}</p>
+        <p class="list-group-item-text">{{ car.ownedBy }}</p>
+        <p class="list-group-item-text">{{ car.soldBy }}</p>
+      </div>
+    </a>
+    <app-car-item></app-car-item>
+  </div>
+</div>
