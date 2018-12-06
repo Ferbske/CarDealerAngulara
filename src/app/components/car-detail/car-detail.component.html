@@ -1,0 +1,31 @@
+<br><br>
+<div class="row">
+  <div class="col-sm">
+    <h5>ChassisNr: {{ car.chassisNumber }}</h5>
+  </div>
+  <div class="col-sm-12">
+    Brand:
+    {{ car.brand }}
+  </div>
+  <div class="col-sm-12">
+    Fuel Type:
+    {{ car.fuelType }}
+  </div>
+  <div class="col-sm-12">
+    Type Car:
+    {{ car.typeCar }}
+  </div>
+  <div class="col-sm-12">
+    Owned By:
+    {{ car.ownedBy.firstName }} {{ car.ownedBy.lastName }}
+  </div>
+  <div class="col-sm-12">
+    Sold By:
+    {{ car.soldBy.firstName }} {{ car.soldBy.lastName }}
+  </div>
+  <div class="col-sm-12">
+    <button class="btn btn-primary" routerLink="/car/edit/{{ index }}" [routerLinkActive]="['active']">Edit Car</button>
+  </div>
+</div>
+
+

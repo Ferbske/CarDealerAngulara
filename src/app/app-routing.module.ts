@@ -8,8 +8,9 @@ import { CarEditComponent } from "./components/car-edit/car-edit.component";
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
+  { path: 'home/:index', component: HomeComponent},
   { path: 'car/create', component: CarCreateComponent},
-  { path: 'car/edit', component: CarEditComponent},
+  { path: 'car/edit/:index', component: CarEditComponent},
   { path: 'employee', component: EmployeeListComponent}
 ];
 

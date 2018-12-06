@@ -14,6 +14,8 @@ export class CarModel {
     this.brand = brand;
     this.fuelType = fuelType;
     this.typeCar = typeCar;
+    this.soldBy = null;
+    this.ownedBy = null;
   }
 }
 

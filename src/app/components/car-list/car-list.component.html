@@ -1,0 +1,22 @@
+<div class="row">
+  <button class="btn btn-primary" routerLink="/car/create" [routerLinkActive]="['active']" href="#">New Car</button>
+  <table class="table table-hover">
+    <thead>
+    <th>Index</th>
+    <th>ChassisNr</th>
+    <th>Brand</th>
+    <th>Owned By</th>
+    <th>Sold By</th>
+    </thead>
+    <tbody>
+    <tr
+      *ngFor="let car of cars; let i = index" [attr.data-index]="i">
+      <td>{{ i + 1 }}</td>
+      <td><a href="home/{{ i }}" class="clearfix">{{ car.chassisNumber }}</a></td>
+      <td>{{ car.brand }}</td>
+      <td>{{ car.ownedBy }}</td>
+      <td>{{ car.soldBy }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

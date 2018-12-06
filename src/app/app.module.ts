@@ -11,8 +11,8 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { CarCreateComponent } from './components/car-create/car-create.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { HomeComponent } from "./components/home/home.component";
-import { CarItemComponent } from './components/car-item/car-item.component';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
+import { CarService } from "./models/car/car.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +23,6 @@ import { CarEditComponent } from './components/car-edit/car-edit.component';
     CarCreateComponent,
     EmployeeListComponent,
     HomeComponent,
-    CarItemComponent,
     CarEditComponent
   ],
   imports: [
@@ -32,7 +31,9 @@ import { CarEditComponent } from './components/car-edit/car-edit.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    CarService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

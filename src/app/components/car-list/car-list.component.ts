@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { CarModel } from '../../models/car/car.model';
+import { CarService } from '../../models/car/car.service';
 
 @Component({
   selector: 'app-car-list',
@@ -7,18 +8,12 @@ import { CarModel } from '../../models/car/car.model';
   styleUrls: ['./car-list.component.css']
 })
 export class CarListComponent implements OnInit {
-  title = 'Car List Component';
+  cars: CarModel[];
 
-  cars: CarModel[] = [
-    new CarModel(1234,'Test Car 1','Test Car 1','Test Car 1'),
-    new CarModel(1235,'Test Car 2','Test Car 2','Test Car 2')
-  ];
-
-  constructor() {
-
+  constructor(private carService: CarService) {
+    this.cars = carService.getAllCars();
   }
 
   ngOnInit() {
-
   }
 }
