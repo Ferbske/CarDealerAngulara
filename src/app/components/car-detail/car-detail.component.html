@@ -17,15 +17,20 @@
   </div>
   <div class="col-sm-12">
     Owned By:
-    {{ car.ownedBy.firstName }} {{ car.ownedBy.lastName }}
+    {{ owner }}
   </div>
   <div class="col-sm-12">
     Sold By:
-    {{ car.soldBy.firstName }} {{ car.soldBy.lastName }}
+    {{ seller }}
   </div>
   <div class="col-sm-12">
-    <button class="btn btn-primary" routerLink="/car/edit/{{ index }}" [routerLinkActive]="['active']">Edit Car</button>
+    <button class="btn btn-primary" routerLink="/car/edit/{{ car.chassisNumber }}">Edit Car</button>
+    <br>
+    <button *ngIf="hasCustomer; else editCustomer" class="btn btn-primary" routerLink="/car/customer/{{ car.chassisNumber }}">Add Customer</button>
+    <ng-template #editCustomer>
+      <button class="btn btn-primary" routerLink="/car/customer/{{ car.chassisNumber }}">Edit Customer</button>
+    </ng-template>
+    <br>
+    <button class="btn btn-danger" (click)="deleteCar()">Delete Car</button>
   </div>
 </div>
-
-

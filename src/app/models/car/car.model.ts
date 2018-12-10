@@ -1,5 +1,5 @@
-import { CustomerModel } from "../customer/customer.model";
-import { EmployeeModel } from "../employee/employee.model";
+import { CustomerModel } from '../customer/customer.model';
+import { EmployeeModel } from '../employee/employee.model';
 
 export class CarModel {
   public chassisNumber: number;

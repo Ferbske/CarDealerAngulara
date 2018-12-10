@@ -1,14 +1,13 @@
 <br>
-<p>Chassis Number:</p>
-<input type="text" class="form-control" [(ngModel)]="chassisNumber">
+<h1>Chassis Number: {{ car.chassisNumber }}</h1>
 <br>
 <p>Brand:</p>
-<input type="text" class="form-control" [(ngModel)]="brand">
+<input type="text" class="form-control" [(ngModel)]="car.brand">
 <br>
 <p>Fuel Type:</p>
-<input type="text" class="form-control" [(ngModel)]="fuelType">
+<input type="text" class="form-control" [(ngModel)]="car.fuelType">
 <br>
 <p>Type Car:</p>
-<input type="text" class="form-control" [(ngModel)]="typeCar">
+<input type="text" class="form-control" [(ngModel)]="car.typeCar">
 <br>
 <button class="btn btn-primary" [disabled]="inputsEmpty" (click)="onSubmitEditCar()">Edit Car</button>

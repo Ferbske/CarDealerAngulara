@@ -11,4 +11,4 @@
 <p>Type Car:</p>
 <input type="text" class="form-control" [(ngModel)]="typeCar">
 <br>
-<button class="btn btn-primary" [disabled]="inputsEmpty" (click)="onSubmitCreateCar()">Create Car</button>
+<button class="btn btn-primary" [disabled]="inputsEmpty" (click)="onSubmitCreateCar()" routerLink="/home">Create Car</button>

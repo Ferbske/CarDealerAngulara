@@ -4,6 +4,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { EmployeeListComponent } from "./components/employee-list/employee-list.component";
 import { CarCreateComponent } from "./components/car-create/car-create.component";
 import { CarEditComponent } from "./components/car-edit/car-edit.component";
+import {CarCustomerComponent} from './components/car-customer/car-customer.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'home/:index', component: HomeComponent},
   { path: 'car/create', component: CarCreateComponent},
   { path: 'car/edit/:index', component: CarEditComponent},
+  { path: 'car/customer/:index', component: CarCustomerComponent},
   { path: 'employee', component: EmployeeListComponent}
 ];
 

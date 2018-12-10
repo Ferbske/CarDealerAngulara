@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule} from "@angular/http";
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,9 +10,10 @@ import { CarListComponent } from './components/car-list/car-list.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarCreateComponent } from './components/car-create/car-create.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
-import { HomeComponent } from "./components/home/home.component";
+import { HomeComponent } from './components/home/home.component';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
-import { CarService } from "./models/car/car.service";
+import { CarService } from './models/car/car.service';
+import { CarCustomerComponent } from './components/car-customer/car-customer.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CarService } from "./models/car/car.service";
     CarCreateComponent,
     EmployeeListComponent,
     HomeComponent,
-    CarEditComponent
+    CarEditComponent,
+    CarCustomerComponent
   ],
   imports: [
     BrowserModule,
@@ -31,9 +33,7 @@ import { CarService } from "./models/car/car.service";
     FormsModule,
     HttpModule
   ],
-  providers: [
-    CarService
-  ],
+  providers: [CarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,10 +12,17 @@
     <tr
       *ngFor="let car of cars; let i = index" [attr.data-index]="i">
       <td>{{ i + 1 }}</td>
-      <td><a href="home/{{ i }}" class="clearfix">{{ car.chassisNumber }}</a></td>
+      <td>
+        <a
+          class="clearfix"
+          routerLink="/home/{{ car.chassisNumber }}"
+          [routerLinkActive]="['active']"
+          href="#"
+          (click)="onSelected()"
+        >{{ car.chassisNumber }}</a></td>
       <td>{{ car.brand }}</td>
-      <td>{{ car.ownedBy }}</td>
-      <td>{{ car.soldBy }}</td>
+      <td>{{ car.fuelType }}</td>
+      <td>{{ car.typeCar }}</td>
     </tr>
     </tbody>
   </table>
