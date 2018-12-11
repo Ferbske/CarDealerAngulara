@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import { CarModel } from '../../models/car/car.model';
 import { CarService } from '../../models/car/car.service';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ export class CarListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.carService.getCars()
       .subscribe(
-        (cars: any[]) => {
+        (cars: CarModel[]) => {
           this.cars = cars.results;
         },
         (error) => console.log(error)

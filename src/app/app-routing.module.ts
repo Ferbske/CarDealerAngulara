@@ -5,6 +5,7 @@ import { EmployeeListComponent } from "./components/employee-list/employee-list.
 import { CarCreateComponent } from "./components/car-create/car-create.component";
 import { CarEditComponent } from "./components/car-edit/car-edit.component";
 import {CarCustomerComponent} from './components/car-customer/car-customer.component';
+import {CarCustomerEditComponent} from './components/car-customer-edit/car-customer-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'car/create', component: CarCreateComponent},
   { path: 'car/edit/:index', component: CarEditComponent},
   { path: 'car/customer/:index', component: CarCustomerComponent},
+  { path: 'car/customer/edit/:index', component: CarCustomerEditComponent},
   { path: 'employee', component: EmployeeListComponent}
 ];
 

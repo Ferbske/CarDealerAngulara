@@ -24,19 +24,18 @@ export class CarEditComponent implements OnInit, OnDestroy {
       this.subscriptionCarService = this.carService.getACar(this.index)
         .subscribe(
           (car: any[]) => {
-            const car = car.results[0];
-            if (car.ownedBy === null) {
+            const carSelected = car.results[0];
+            if (carSelected.ownedBy === null) {
               this.owner = 'Not Owned';
             } else {
-              this.owner = car.ownedBy.firstName + ' ' + car.ownedBy.lastName;
+              this.owner = carSelected.ownedBy.firstName + ' ' + carSelected.ownedBy.lastName;
             }
-            if (car.soldBy === null) {
+            if (carSelected.soldBy === null) {
               this.seller = 'Not Sold';
             } else {
-              this.seller = car.soldBy.firstName + ' ' + car.soldBy.lastName;
+              this.seller = carSelected.soldBy.firstName + ' ' + carSelected.soldBy.lastName;
             }
-            this.car = car;
-            console.log(this.car);
+            this.car = carSelected;
           },
           (error) => console.log(error)
         );
@@ -44,6 +43,7 @@ export class CarEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmitEditCar() {
+    // console.log(this.car);
     this.subscriptionCarService = this.carService.editCar(this.car.chassisNumber, this.car.brand, this.car.fuelType, this.car.typeCar)
       .subscribe(
         (response) => console.log(response),

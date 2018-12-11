@@ -1,6 +1,4 @@
 import {Injectable} from '@angular/core';
-import {CarModel} from './car.model';
-import { Observable } from 'rxjs';
 import {Http, Headers} from '@angular/http';
 import 'rxjs-compat/add/operator/map';
 
@@ -9,42 +7,10 @@ import 'rxjs-compat/add/operator/map';
 })
 
 export class CarService {
-  cars: CarModel[] =
-    [
-      new CarModel(
-        1234,
-        'Test Car 1',
-        'Test Car 1',
-        'Test Car 1'
-      ),
-      new CarModel(
-        1235,
-        'Test Car 2',
-        'Test Car 2',
-        'Test Car 2'
-      ),
-      new CarModel(
-        1236,
-        'Test Car 3',
-        'Test Car 3',
-        'Test Car 3'
-      ),
-      new CarModel(
-        1237,
-        'Test Car 4',
-        'Test Car 4',
-        'Test Car 4'
-      )
-    ];
 
   constructor(private http: Http) { }
 
-  findOneCar(index: number): CarModel {
-    return this.cars[index];
-  }
-
   createAuthorizationHeader(headers: Headers) {
-    // headers.append('Access-Control-Allow-Origin', '*');
     // headers.append('Content-Type', 'application/json');
   }
 
@@ -56,8 +22,7 @@ export class CarService {
     })
       .map(
         (response: Response) => {
-          const data = response.json();
-          return data;
+          return response.json();
         }
       );
   }
@@ -70,8 +35,7 @@ export class CarService {
     })
       .map(
         (response: Response) => {
-          const data = response.json();
-          return data;
+          return response.json();
         }
       );
   }
@@ -106,5 +70,43 @@ export class CarService {
     const headers = new Headers();
     this.createAuthorizationHeader(headers);
     return this.http.delete('https://cardealer-api.herokuapp.com/car/' + chassisNumber);
+  }
+
+  addCustomer(chassisNumber: number, firstName: string, lastName: string, age: number, street: string, houseNumber: number, postalCode: string) {
+    const headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.post('https://cardealer-api.herokuapp.com/customer', {
+      'chassisNumber': chassisNumber,
+      'firstName': firstName,
+      'lastName': lastName,
+      'age': age,
+      'street': street,
+      'houseNumber': houseNumber,
+      'postalCode': postalCode
+    }, {
+      headers: headers
+    });
+  }
+
+  editCustomer(chassisNumber: number, firstName: string, lastName: string, age: number, street: string, houseNumber: number, postalCode: string) {
+    const headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.put('https://cardealer-api.herokuapp.com/customer', {
+      'chassisNumber': chassisNumber,
+      'newFirstName': firstName,
+      'newLastName': lastName,
+      'newAge': age,
+      'newStreet': street,
+      'newHouseNumber': houseNumber,
+      'newPostalCode': postalCode
+    }, {
+      headers: headers
+    });
+  }
+
+  deleteCustomer(chassisNumber: number) {
+    const headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.delete('https://cardealer-api.herokuapp.com/customer/' + chassisNumber);
   }
 }

@@ -14,6 +14,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { CarService } from './models/car/car.service';
 import { CarCustomerComponent } from './components/car-customer/car-customer.component';
+import { CarCustomerEditComponent } from './components/car-customer-edit/car-customer-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CarCustomerComponent } from './components/car-customer/car-customer.com
     EmployeeListComponent,
     HomeComponent,
     CarEditComponent,
-    CarCustomerComponent
+    CarCustomerComponent,
+    CarCustomerEditComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<br>
+<h1>Chassis Number: {{ index }}</h1>
+<br>
+<p>Customer First Name:</p>
+<input type="text" class="form-control" [(ngModel)]="customer.firstName">
+<br>
+<p>Customer Last Name:</p>
+<input type="text" class="form-control" [(ngModel)]="customer.lastName">
+<br>
+<p>Age:</p>
+<input type="text" class="form-control" [(ngModel)]="customer.age">
+<br>
+<p>Street:</p>
+<input type="text" class="form-control" [(ngModel)]="customer.street">
+<br>
+<p>House Number:</p>
+<input type="text" class="form-control" [(ngModel)]="customer.houseNumber">
+<br>
+<p>Postal Code:</p>
+<input type="text" class="form-control" [(ngModel)]="customer.postalCode">
+<br>
+<button class="btn btn-primary" (click)="onSubmitEditCustomer()">Edit Customer of Car</button>
