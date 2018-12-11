@@ -1,0 +1,16 @@
+<br>
+<h1>ID: {{ index }}</h1>
+<br>
+<p>First Name:</p>
+<input type="text" class="form-control" [(ngModel)]="employee.firstName">
+<br>
+<p>Last Name:</p>
+<input type="text" class="form-control" [(ngModel)]="employee.lastName">
+<br>
+<p>Department:</p>
+<input type="text" class="form-control" [(ngModel)]="employee.department">
+<br>
+<p>Job:</p>
+<input type="text" class="form-control" [(ngModel)]="employee.job">
+<br>
+<button class="btn btn-primary" (click)="onSubmitEditEmployee()">Edit Employee</button>

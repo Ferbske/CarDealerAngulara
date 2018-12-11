@@ -1,0 +1,28 @@
+<br><br>
+<div class="row">
+  <div class="col-sm">
+    <h5>ID: {{ index }}</h5>
+  </div>
+  <div class="col-sm-12">
+    First Name:
+    {{ employee.firstName }}
+  </div>
+  <div class="col-sm-12">
+    Last Name:
+    {{ employee.lastName }}
+  </div>
+  <div class="col-sm-12">
+    Department:
+    {{ employee.department }}
+  </div>
+  <div class="col-sm-12">
+    Job:
+    {{ employee.job }}
+  </div>
+  <div class="col-sm-12">
+    <button class="btn btn-primary" routerLink="/employee/edit/{{ index }}">Edit Employee</button>
+    <br>
+    <button class="btn btn-danger" (click)="deleteEmployee()">Delete Employee</button>
+    <br>
+  </div>
+</div>

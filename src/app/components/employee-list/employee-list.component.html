@@ -1,1 +1,45 @@
-<h2>{{ title }}</h2>
+<div class="row">
+
+</div>
+
+<div class="row">
+  <div class="col-md-5" (carSelected)="showDetails = true">
+    <button class="btn btn-primary" routerLink="/employee/create" [routerLinkActive]="['active']" href="#">New
+      Employee
+    </button>
+    <table class="table table-hover">
+      <thead>
+      <th>Index</th>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let employee of employees; let i = index" [attr.data-index]="i">
+        <td>{{ i + 1 }}</td>
+        <td>
+          <a
+            class="clearfix"
+            routerLink="/employee/detail/{{ employee._id }}"
+            [routerLinkActive]="['active']"
+            href="#"
+            (click)="onSelected()"
+          >
+            {{ employee._id }}
+          </a>
+        </td>
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.lastName }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-7">
+    <app-employee-details
+      *ngIf="showDetails; else infoText"
+    ></app-employee-details>
+    <ng-template #infoText><br>
+      <p>Please select a Employee for more details</p></ng-template>
+  </div>
+</div>

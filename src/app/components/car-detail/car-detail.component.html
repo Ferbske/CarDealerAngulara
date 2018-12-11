@@ -1,7 +1,7 @@
 <br><br>
 <div class="row">
   <div class="col-sm">
-    <h5>ChassisNr: {{ car.chassisNumber }}</h5>
+    <h5>ChassisNr: {{ index }}</h5>
   </div>
   <div class="col-sm-12">
     Brand:
@@ -24,13 +24,13 @@
     {{ seller }}
   </div>
   <div class="col-sm-12">
-    <button class="btn btn-primary" routerLink="/car/edit/{{ car.chassisNumber }}">Edit Car</button>
+    <button class="btn btn-primary" routerLink="/car/edit/{{ index }}">Edit Car</button>
     <br>
     <button class="btn btn-danger" (click)="deleteCar()">Delete Car</button>
     <br>
     <button *ngIf="hasCustomer; else editCustomer" class="btn btn-primary" routerLink="/car/customer/{{ car.chassisNumber }}">Add Customer</button>
     <ng-template #editCustomer>
-      <button class="btn btn-primary" routerLink="/car/customer/edit/{{ car.chassisNumber }}">Edit Customer</button>
+      <button class="btn btn-primary" routerLink="/car/customer/edit/{{ index }}">Edit Customer</button>
     </ng-template>
     <br>
     <button class="btn btn-danger" (click)="deleteCustomer()">Delete Customer</button>

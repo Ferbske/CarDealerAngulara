@@ -8,7 +8,6 @@ import { CarService } from '../../models/car/car.service';
   providers: []
 })
 export class CarCreateComponent implements OnInit {
-  title = 'Car Create Component';
   chassisNumber: number;
   brand: string;
   fuelType: string;

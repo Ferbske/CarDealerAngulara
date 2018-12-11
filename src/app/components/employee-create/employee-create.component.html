@@ -1,0 +1,14 @@
+<br>
+<p>First Name:</p>
+<input type="text" class="form-control" [(ngModel)]="firstName">
+<br>
+<p>Last Name:</p>
+<input type="text" class="form-control" [(ngModel)]="lastName">
+<br>
+<p>Departement:</p>
+<input type="text" class="form-control" [(ngModel)]="department">
+<br>
+<p>Job:</p>
+<input type="text" class="form-control" [(ngModel)]="job">
+<br>
+<button class="btn btn-primary" [disabled]="inputsEmpty" (click)="onSubmitCreateEmployee()" routerLink="/employee">Create Car</button>

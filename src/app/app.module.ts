@@ -15,6 +15,10 @@ import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { CarService } from './models/car/car.service';
 import { CarCustomerComponent } from './components/car-customer/car-customer.component';
 import { CarCustomerEditComponent } from './components/car-customer-edit/car-customer-edit.component';
+import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
+import { EmployeeCreateComponent } from './components/employee-create/employee-create.component';
+import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
+import {EmployeeService} from './models/employee/employee.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import { CarCustomerEditComponent } from './components/car-customer-edit/car-cus
     HomeComponent,
     CarEditComponent,
     CarCustomerComponent,
-    CarCustomerEditComponent
+    CarCustomerEditComponent,
+    EmployeeDetailsComponent,
+    EmployeeCreateComponent,
+    EmployeeEditComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,7 @@ import { CarCustomerEditComponent } from './components/car-customer-edit/car-cus
     FormsModule,
     HttpModule
   ],
-  providers: [CarService],
+  providers: [CarService, EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
