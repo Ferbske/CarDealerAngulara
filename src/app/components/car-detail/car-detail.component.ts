@@ -33,16 +33,15 @@ export class CarDetailComponent implements OnInit, OnDestroy {
       this.index = params['index'];
       this.subscriptionCarService = this.carService.getACar(this.index)
         .subscribe(
-          (car: any[]) => {
-            const carResult = car.results[0];
-            if (carResult.ownedBy === null) {
+          (car: CarModel[]) => {
+            if (car[0].ownedBy === null) {
               this.owner = 'Not Owned';
               this.hasCustomer = true;
             } else {
-              this.owner = carResult.ownedBy.firstName + ' ' + carResult.ownedBy.lastName;
+              this.owner = car[0].ownedBy.firstName + ' ' + car[0].ownedBy.lastName;
               this.hasCustomer = false;
             }
-            this.car = carResult;
+            this.car = car[0];
           },
           (error) => console.log(error)
         );

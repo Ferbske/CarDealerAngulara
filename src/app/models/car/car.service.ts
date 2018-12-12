@@ -21,8 +21,8 @@ export class CarService {
       headers: headers
     })
       .map(
-        (response: Response) => {
-          return response.json();
+        (response) => {
+          return response.json().results;
         }
       );
   }
@@ -34,8 +34,8 @@ export class CarService {
       headers: headers
     })
       .map(
-        (response: Response) => {
-          return response.json();
+        (response) => {
+          return response.json().results;
         }
       );
   }

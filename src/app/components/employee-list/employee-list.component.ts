@@ -19,7 +19,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     this.subscription = this.employeeService.getEmployees()
       .subscribe(
         (employees: EmployeeModel[]) => {
-          this.employees = employees.results;
+          this.employees = employees;
         },
         (error) => console.log(error)
       );

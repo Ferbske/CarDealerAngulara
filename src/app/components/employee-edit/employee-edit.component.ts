@@ -28,9 +28,8 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       this.index = params['index'];
       this.subscriptionEmployeeService = this.employeeService.getAEmployee(this.index)
         .subscribe(
-          (employee: any[]) => {
-            const employeeSelected = employee.results[0];
-            this.employee = employeeSelected;
+          (employee: EmployeeModel[]) => {
+            this.employee = employee[0];
           },
           (error) => console.log(error)
         );

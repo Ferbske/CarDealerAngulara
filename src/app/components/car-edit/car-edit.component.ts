@@ -30,8 +30,8 @@ export class CarEditComponent implements OnInit, OnDestroy {
       this.index = params['index'];
       this.subscriptionCarService = this.carService.getACar(this.index)
         .subscribe(
-          (car: any[]) => {
-            const carSelected = car.results[0];
+          (car: CarModel[]) => {
+            const carSelected = car[0];
             this.car = carSelected;
           },
           (error) => console.log(error)

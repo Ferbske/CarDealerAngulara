@@ -3,6 +3,7 @@ import {CustomerModel} from '../../models/customer/customer.model';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {CarService} from '../../models/car/car.service';
+import {CarModel} from '../../models/car/car.model';
 
 @Component({
   selector: 'app-car-customer-edit',
@@ -29,8 +30,8 @@ export class CarCustomerEditComponent implements OnInit, OnDestroy {
       this.index = params['index'];
       this.subscriptionCarService = this.carService.getACar(this.index)
         .subscribe(
-          (car: any[]) => {
-            const carSelected = car.results[0];
+          (car: CarModel[]) => {
+            const carSelected = car[0];
             this.customer = carSelected.ownedBy;
           },
           (error) => console.log(error)

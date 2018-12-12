@@ -11,7 +11,7 @@ import {CarService} from '../../models/car/car.service';
   styleUrls: ['./sold-by-edit.component.css']
 })
 export class SoldByEditComponent implements OnInit, OnDestroy {
-  index: string;
+  index: number;
   employeeID: string;
   employees: EmployeeModel[];
   private subscriptionParams: Subscription;
@@ -27,7 +27,7 @@ export class SoldByEditComponent implements OnInit, OnDestroy {
       this.subscriptionEmployee = this.employeeService.getEmployees()
         .subscribe(
           (employees: EmployeeModel[]) => {
-            this.employees = employees.results;
+            this.employees = employees;
           },
           (error) => console.log(error)
         );
