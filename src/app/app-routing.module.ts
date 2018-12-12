@@ -8,6 +8,7 @@ import {CarCustomerComponent} from './components/car-customer/car-customer.compo
 import {CarCustomerEditComponent} from './components/car-customer-edit/car-customer-edit.component';
 import {EmployeeCreateComponent} from './components/employee-create/employee-create.component';
 import {EmployeeEditComponent} from './components/employee-edit/employee-edit.component';
+import {SoldByEditComponent} from './components/sold-by-edit/sold-by-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'employee/detail/:index', component: EmployeeListComponent},
   { path: 'employee/create', component: EmployeeCreateComponent},
   { path: 'employee/edit/:index', component: EmployeeEditComponent},
+  { path: 'car/soldby/:index', component: SoldByEditComponent }
 ];
 
 @NgModule({

@@ -14,7 +14,6 @@ export class CarDetailComponent implements OnInit, OnDestroy {
   car: any;
   index: number;
   owner: string;
-  seller: string;
   hasCustomer: boolean = false;
   private subscriptionParams: Subscription;
   private subscriptionCarService: Subscription;
@@ -36,10 +35,8 @@ export class CarDetailComponent implements OnInit, OnDestroy {
               this.owner = carResult.ownedBy.firstName + ' ' + carResult.ownedBy.lastName;
               this.hasCustomer = false;
             }
-            if (carResult.soldBy === null) {
+            if (carResult.soldBy === null || carResult.soldBy === undefined) {
               this.seller = 'Not Sold';
-            } else {
-              this.seller = carResult.soldBy.firstName + ' ' + carResult.soldBy.lastName;
             }
             this.car = carResult;
           },
@@ -58,6 +55,14 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 
   deleteCustomer() {
     this.subscriptionCarService = this.carService.deleteCustomer(this.car.chassisNumber)
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
+  }
+
+  deleteSeller() {
+    this.subscriptionCarService = this.carService.deleteSoldBy(this.car.chassisNumber)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)

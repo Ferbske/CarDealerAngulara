@@ -19,6 +19,7 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 import { EmployeeCreateComponent } from './components/employee-create/employee-create.component';
 import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
 import {EmployeeService} from './models/employee/employee.service';
+import { SoldByEditComponent } from './components/sold-by-edit/sold-by-edit.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {EmployeeService} from './models/employee/employee.service';
     CarCustomerEditComponent,
     EmployeeDetailsComponent,
     EmployeeCreateComponent,
-    EmployeeEditComponent
+    EmployeeEditComponent,
+    SoldByEditComponent
   ],
   imports: [
     BrowserModule,

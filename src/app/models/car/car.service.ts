@@ -107,6 +107,27 @@ export class CarService {
   deleteCustomer(chassisNumber: number) {
     const headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this.http.delete('https://cardealer-api.herokuapp.com/customer/' + chassisNumber);
+    return this.http.delete('https://cardealer-api.herokuapp.com/customer/' + chassisNumber, {
+      headers: headers
+    });
+  }
+
+  editSoldBy(chassisNumber: number, employeeID: string) {
+    const headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.put('https://cardealer-api.herokuapp.com/car/employee', {
+      'chassisNumber': chassisNumber,
+      'employeeID': employeeID
+    }, {
+      headers: headers
+    });
+  }
+
+  deleteSoldBy(chassisNumber: number) {
+    const headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.delete('https://cardealer-api.herokuapp.com/car/employee/' + chassisNumber, {
+      headers: headers
+    });
   }
 }
