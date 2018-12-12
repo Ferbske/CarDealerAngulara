@@ -1,14 +1,56 @@
 <br>
 <p>First Name:</p>
-<input type="text" class="form-control" [(ngModel)]="firstName">
+<input id="firstName" name="firstName" class="form-control"
+       required
+       [(ngModel)]="firstName" #firstNameInput="ngModel" >
+
+<div *ngIf="firstNameInput.invalid && (firstNameInput.dirty || firstNameInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="firstNameInput.errors.required">
+    First Name is required.
+  </div>
+</div>
+
 <br>
 <p>Last Name:</p>
-<input type="text" class="form-control" [(ngModel)]="lastName">
+<input id="lastName" name="lastName" class="form-control"
+       required
+       [(ngModel)]="lastName" #lastNameInput="ngModel" >
+
+<div *ngIf="lastNameInput.invalid && (lastNameInput.dirty || lastNameInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="lastNameInput.errors.required">
+    Last Name is required.
+  </div>
+</div>
+
 <br>
-<p>Departement:</p>
-<input type="text" class="form-control" [(ngModel)]="department">
+<p>Department:</p>
+<input id="department" name="department" class="form-control"
+       required
+       [(ngModel)]="department" #departmentInput="ngModel" >
+
+<div *ngIf="departmentInput.invalid && (departmentInput.dirty || departmentInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="departmentInput.errors.required">
+    Department  is required.
+  </div>
+</div>
+
 <br>
 <p>Job:</p>
-<input type="text" class="form-control" [(ngModel)]="job">
+<input id="job" name="job" class="form-control"
+       required
+       [(ngModel)]="job" #jobInput="ngModel" >
+
+<div *ngIf="jobInput.invalid && (jobInput.dirty || jobInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="jobInput.errors.required">
+    Job  is required.
+  </div>
+</div>
+
 <br>
-<button class="btn btn-primary" [disabled]="inputsEmpty" (click)="onSubmitCreateEmployee()" routerLink="/employee">Create Car</button>
+<button class="btn btn-primary"
+        [disabled]="firstNameInput.invalid || lastNameInput.invalid || departmentInput.invalid || jobInput.invalid"
+        (click)="onSubmitCreateEmployee()" routerLink="/employee">Create Car</button>

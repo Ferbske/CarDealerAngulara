@@ -2,9 +2,20 @@
   <div class="col-md-5">
     <h1>Chassis Number: {{ index }}</h1>
     <p>Employee ID:</p>
-    <input type="text" class="form-control" [(ngModel)]="employeeID">
+    <input id="employeeID" name="employeeID" class="form-control"
+           required
+           [(ngModel)]="employeeID" #employeeIDInput="ngModel" >
+
+    <div *ngIf="employeeIDInput.invalid && (employeeIDInput.dirty || employeeIDInput.touched)"
+         class="alert alert-danger">
+      <div *ngIf="employeeIDInput.errors.required">
+        Employee ID is required.
+      </div>
+    </div>
     <br>
-    <button class="btn btn-primary" (click)="onSubmitEditSoldBy()">Edit Seller</button>
+    <button class="btn btn-primary"
+            [disabled]="employeeIDInput.invalid"
+            (click)="onSubmitEditSoldBy()">Edit Seller</button>
   </div>
   <div class="col-md-7">
     <table class="table table-hover">

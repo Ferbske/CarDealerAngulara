@@ -1,22 +1,88 @@
 <br>
 <h1>Chassis Number: {{ index }}</h1>
+
 <br>
 <p>Customer First Name:</p>
-<input type="text" class="form-control" [(ngModel)]="firstName">
+<input id="firstName" name="firstName" class="form-control"
+       required
+       [(ngModel)]="firstName" #firstNameInput="ngModel" >
+
+<div *ngIf="firstNameInput.invalid && (firstNameInput.dirty || firstNameInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="firstNameInput.errors.required">
+    First Name is required.
+  </div>
+</div>
+
 <br>
 <p>Customer Last Name:</p>
-<input type="text" class="form-control" [(ngModel)]="lastName">
+<input id="lastName" name="lastName" class="form-control"
+       required
+       [(ngModel)]="lastName" #lastNameInput="ngModel" >
+
+<div *ngIf="lastNameInput.invalid && (lastNameInput.dirty || lastNameInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="lastNameInput.errors.required">
+    Last Name is required.
+  </div>
+</div>
+
 <br>
 <p>Age:</p>
-<input type="text" class="form-control" [(ngModel)]="age">
+<input id="age" name="age" class="form-control"
+       required
+       [(ngModel)]="age" #ageInput="ngModel" >
+
+<div *ngIf="ageInput.invalid && (ageInput.dirty || ageInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="ageInput.errors.required">
+    Age is required.
+  </div>
+  <div *ngIf="ageInput.errors.minlength">
+    Age must be 18 or above.
+  </div>
+</div>
+
 <br>
 <p>Street:</p>
-<input type="text" class="form-control" [(ngModel)]="street">
+<input id="street" name="street" class="form-control"
+       required
+       [(ngModel)]="street" #streetInput="ngModel" >
+
+<div *ngIf="streetInput.invalid && (streetInput.dirty || streetInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="streetInput.errors.required">
+    Street is required.
+  </div>
+</div>
+
 <br>
 <p>House Number:</p>
-<input type="text" class="form-control" [(ngModel)]="houseNumber">
+<input id="houseNumber" name="houseNumber" class="form-control"
+       required
+       [(ngModel)]="houseNumber" #houseNumberInput="ngModel" >
+
+<div *ngIf="houseNumberInput.invalid && (houseNumberInput.dirty || houseNumberInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="houseNumberInput.errors.required">
+    House Number is required.
+  </div>
+</div>
+
 <br>
 <p>Postal Code:</p>
-<input type="text" class="form-control" [(ngModel)]="postalCode">
+<input id="postalCode" name="postalCode" class="form-control"
+       required
+       [(ngModel)]="postalCode" #postalCodeInput="ngModel" >
+
+<div *ngIf="postalCodeInput.invalid && (postalCodeInput.dirty || postalCodeInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="postalCodeInput.errors.required">
+    Postal Code is required.
+  </div>
+</div>
+
 <br>
-<button class="btn btn-primary" [disabled]="inputsEmpty" (click)="onSubmitAddCustomer()">Add Customer to Car</button>
+<button class="btn btn-primary"
+        [disabled]="firstNameInput.invalid || lastNameInput.invalid || ageInput.invalid || streetInput.invalid || houseNumberInput.invalid || postalCodeInput.invalid"
+        (click)="onSubmitAddCustomer()">Add Customer to Car</button>

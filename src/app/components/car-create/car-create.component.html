@@ -1,14 +1,59 @@
 <br>
 <p>Chassis Number:</p>
-<input type="text" class="form-control" [(ngModel)]="chassisNumber">
+<input id="chassisNumber" name="chassisNumber" class="form-control"
+       required minlength="4"
+       [(ngModel)]="chassisNumber" #chassisInput="ngModel" >
+
+<div *ngIf="chassisInput.invalid && (chassisInput.dirty || chassisInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="chassisInput.errors.required">
+    Chassis Number is required.
+  </div>
+  <div *ngIf="chassisInput.errors.minlength">
+    Chassis Number must be at least 4 characters long.
+  </div>
+</div>
+
 <br>
 <p>Brand:</p>
-<input type="text" class="form-control" [(ngModel)]="brand">
+<input id="brand" name="brand" class="form-control"
+       required
+       [(ngModel)]="brand" #brandInput="ngModel" >
+
+<div *ngIf="brandInput.invalid && (brandInput.dirty || brandInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="brandInput.errors.required">
+    Brand is required.
+  </div>
+</div>
+
 <br>
 <p>Fuel Type:</p>
-<input type="text" class="form-control" [(ngModel)]="fuelType">
+<input id="fuelType" name="fuelType" class="form-control"
+       required
+       [(ngModel)]="fuelType" #fuelTypeInput="ngModel" >
+
+<div *ngIf="fuelTypeInput.invalid && (fuelTypeInput.dirty || fuelTypeInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="fuelTypeInput.errors.required">
+    Fuel Type is required.
+  </div>
+</div>
+
 <br>
 <p>Type Car:</p>
-<input type="text" class="form-control" [(ngModel)]="typeCar">
+<input id="typeCar" name="typeCar" class="form-control"
+       required
+       [(ngModel)]="typeCar" #typeCarInput="ngModel" >
+
+<div *ngIf="typeCarInput.invalid && (typeCarInput.dirty || typeCarInput.touched)"
+     class="alert alert-danger">
+  <div *ngIf="typeCarInput.errors.required">
+    Type Car is required.
+  </div>
+</div>
+
 <br>
-<button class="btn btn-primary" [disabled]="inputsEmpty" (click)="onSubmitCreateCar()" routerLink="/home">Create Car</button>
+<button class="btn btn-primary"
+        [disabled]="chassisInput.invalid || brandInput.invalid || fuelTypeInput.invalid || typeCarInput.invalid"
+        (click)="onSubmitCreateCar()" routerLink="/home">Create Car</button>
