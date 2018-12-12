@@ -11,7 +11,12 @@ import {EmployeeService} from '../../models/employee/employee.service';
 })
 export class EmployeeEditComponent implements OnInit, OnDestroy {
   index: string;
-  employee: EmployeeModel;
+  employee: EmployeeModel = {
+    'firstName': 'Loading',
+    'lastName': 'Loading',
+    'department': 'Loading',
+    'job': 'Loading'
+  };
   private subscriptionParams: Subscription;
   private subscriptionEmployeeService: Subscription;
 
@@ -41,7 +46,6 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptionEmployeeService.unsubscribe();
     this.subscriptionParams.unsubscribe();
   }
 }

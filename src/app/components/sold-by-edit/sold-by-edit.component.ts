@@ -45,6 +45,5 @@ export class SoldByEditComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptionParams.unsubscribe();
     this.subscriptionEmployee.unsubscribe();
-    this.subscriptionCar.unsubscribe();
   }
 }

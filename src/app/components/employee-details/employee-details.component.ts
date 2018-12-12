@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {EmployeeService} from '../../models/employee/employee.service';
+import {EmployeeModel} from '../../models/employee/employee.model';
 
 @Component({
   selector: 'app-employee-details',
@@ -9,7 +10,12 @@ import {EmployeeService} from '../../models/employee/employee.service';
   styleUrls: ['./employee-details.component.css']
 })
 export class EmployeeDetailsComponent implements OnInit, OnDestroy {
-  employee: any;
+  employee: EmployeeModel = {
+    'firstName': 'Loading',
+    'lastName': 'Loading',
+    'department': 'Loading',
+    'job': 'Loading'
+  };
   index: string;
   private subscriptionParams: Subscription;
   private subscriptionEmployeeService: Subscription;

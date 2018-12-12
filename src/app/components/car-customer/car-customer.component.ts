@@ -32,7 +32,6 @@ export class CarCustomerComponent implements OnInit, OnDestroy {
   }
 
   onSubmitAddCustomer() {
-    console.log(this.customer);
     this.subscriptionCarService = this.carService.addCustomer(this.index, this.firstName, this.lastName, this.age, this.street, this.houseNumber, this.postalCode)
       .subscribe(
         (response) => console.log(response),

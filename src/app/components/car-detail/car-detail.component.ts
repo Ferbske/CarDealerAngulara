@@ -11,7 +11,14 @@ import {Subscription} from 'rxjs';
   providers: []
 })
 export class CarDetailComponent implements OnInit, OnDestroy {
-  car: any;
+  car: CarModel = {
+    'chassisNumber': 1111,
+    'brand': 'Loading',
+    'fuelType': 'Loading',
+    'typeCar': 'Loading',
+    'ownedBy': null,
+    'soldBy': null
+  };
   index: number;
   owner: string;
   hasCustomer: boolean = false;
@@ -34,9 +41,6 @@ export class CarDetailComponent implements OnInit, OnDestroy {
             } else {
               this.owner = carResult.ownedBy.firstName + ' ' + carResult.ownedBy.lastName;
               this.hasCustomer = false;
-            }
-            if (carResult.soldBy === null || carResult.soldBy === undefined) {
-              this.seller = 'Not Sold';
             }
             this.car = carResult;
           },

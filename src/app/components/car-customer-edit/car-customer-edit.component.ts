@@ -11,7 +11,14 @@ import {CarService} from '../../models/car/car.service';
 })
 export class CarCustomerEditComponent implements OnInit, OnDestroy {
   index: number;
-  customer: CustomerModel;
+  customer: CustomerModel = {
+    'firstName': 'Loading',
+    'lastName': 'Loading',
+    'age': 1,
+    'street': 'Loading',
+    'houseNumber': 99999,
+    'postalCode': 'Loading'
+  };
   private subscriptionParams: Subscription;
   private subscriptionCarService: Subscription;
 
@@ -41,6 +48,5 @@ export class CarCustomerEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionParams.unsubscribe();
-    this.subscriptionCarService.unsubscribe();
   }
 }

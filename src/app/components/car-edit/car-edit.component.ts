@@ -11,7 +11,14 @@ import {Subscription} from 'rxjs';
 })
 export class CarEditComponent implements OnInit, OnDestroy {
   index: number;
-  car: CarModel;
+  car: CarModel = {
+    'chassisNumber': 1111,
+    'brand': 'Loading',
+    'fuelType': 'Loading',
+    'typeCar': 'Loading',
+    'ownedBy': null,
+    'soldBy': null
+  };
   private subscriptionParams: Subscription;
   private subscriptionCarService: Subscription;
 
@@ -25,16 +32,6 @@ export class CarEditComponent implements OnInit, OnDestroy {
         .subscribe(
           (car: any[]) => {
             const carSelected = car.results[0];
-            if (carSelected.ownedBy === null) {
-              this.owner = 'Not Owned';
-            } else {
-              this.owner = carSelected.ownedBy.firstName + ' ' + carSelected.ownedBy.lastName;
-            }
-            if (carSelected.soldBy === null) {
-              this.seller = 'Not Sold';
-            } else {
-              this.seller = carSelected.soldBy.firstName + ' ' + carSelected.soldBy.lastName;
-            }
             this.car = carSelected;
           },
           (error) => console.log(error)
@@ -53,6 +50,5 @@ export class CarEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionParams.unsubscribe();
-    this.subscriptionCarService.unsubscribe();
   }
 }
