@@ -10,12 +10,12 @@ export class AuthService {
   constructor(private http: Http, private router: Router) {
   }
 
-  async signupUser(username: string, email: string, password: string) {
-    await this.http.post(this.url + '/register',
+  signupUser(username: string, email: string, password: string) {
+    this.http.post(this.url + '/register',
       {
-        username: username,
-        email: email,
-        password: password
+        'username': username,
+        'email': email,
+        'password': password
       })
       .subscribe(
         (response) => {
@@ -29,11 +29,11 @@ export class AuthService {
       );
   }
 
-  async signinUser(username: string, password: string) {
-    await this.http.post(this.url + '/login',
+  signinUser(username: string, password: string) {
+    this.http.post(this.url + '/login',
       {
-        username: username,
-        password: password
+        'username': username,
+        'password': password
       })
       .subscribe(
         (response) => {
