@@ -9,7 +9,7 @@ import {AuthService} from "../auth.service";
 })
 
 export class SigninComponent implements OnInit {
-  errorcode: number;
+  errorcode: any;
 
   constructor(private authenticationService: AuthService) { }
 
