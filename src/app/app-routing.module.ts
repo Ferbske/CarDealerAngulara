@@ -9,20 +9,25 @@ import {CarCustomerEditComponent} from './components/car-customer-edit/car-custo
 import {EmployeeCreateComponent} from './components/employee-create/employee-create.component';
 import {EmployeeEditComponent} from './components/employee-edit/employee-edit.component';
 import {SoldByEditComponent} from './components/sold-by-edit/sold-by-edit.component';
+import {AuthGuardService} from './components/auth/auth-guard.service';
+import {SignupComponent} from './components/auth/signup/signup.component';
+import {SigninComponent} from './components/auth/signin/signin.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent},
-  { path: 'home/:index', component: HomeComponent},
-  { path: 'car/create', component: CarCreateComponent},
-  { path: 'car/edit/:index', component: CarEditComponent},
-  { path: 'car/customer/:index', component: CarCustomerComponent},
-  { path: 'car/customer/edit/:index', component: CarCustomerEditComponent},
-  { path: 'employee', component: EmployeeListComponent},
-  { path: 'employee/detail/:index', component: EmployeeListComponent},
-  { path: 'employee/create', component: EmployeeCreateComponent},
-  { path: 'employee/edit/:index', component: EmployeeEditComponent},
-  { path: 'car/soldby/:index', component: SoldByEditComponent }
+  { path: '', redirectTo: '/signin', pathMatch: 'full'},
+  { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
+  { path: 'home/:index', component: HomeComponent, canActivate: [AuthGuardService] },
+  { path: 'car/create', component: CarCreateComponent, canActivate: [AuthGuardService] },
+  { path: 'car/edit/:index', component: CarEditComponent, canActivate: [AuthGuardService] },
+  { path: 'car/customer/:index', component: CarCustomerComponent, canActivate: [AuthGuardService] },
+  { path: 'car/customer/edit/:index', component: CarCustomerEditComponent, canActivate: [AuthGuardService] },
+  { path: 'employee', component: EmployeeListComponent, canActivate: [AuthGuardService] },
+  { path: 'employee/detail/:index', component: EmployeeListComponent, canActivate: [AuthGuardService] },
+  { path: 'employee/create', component: EmployeeCreateComponent, canActivate: [AuthGuardService] },
+  { path: 'employee/edit/:index', component: EmployeeEditComponent, canActivate: [AuthGuardService] },
+  { path: 'car/soldby/:index', component: SoldByEditComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

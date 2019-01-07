@@ -18,8 +18,12 @@ import { CarCustomerEditComponent } from './components/car-customer-edit/car-cus
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { EmployeeCreateComponent } from './components/employee-create/employee-create.component';
 import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
-import {EmployeeService} from './models/employee/employee.service';
+import { EmployeeService } from './models/employee/employee.service';
 import { SoldByEditComponent } from './components/sold-by-edit/sold-by-edit.component';
+import { SigninComponent } from './components/auth/signin/signin.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
+import { AuthService } from './components/auth/auth.service';
+import { AuthGuardService } from './components/auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { SoldByEditComponent } from './components/sold-by-edit/sold-by-edit.comp
     EmployeeDetailsComponent,
     EmployeeCreateComponent,
     EmployeeEditComponent,
-    SoldByEditComponent
+    SoldByEditComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,7 @@ import { SoldByEditComponent } from './components/sold-by-edit/sold-by-edit.comp
     FormsModule,
     HttpModule
   ],
-  providers: [CarService, EmployeeService],
+  providers: [CarService, EmployeeService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
