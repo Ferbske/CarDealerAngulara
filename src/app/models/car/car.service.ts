@@ -1,38 +1,31 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
 import 'rxjs-compat/add/operator/map';
+import {AuthService} from '../../components/auth/auth.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class CarService {
+  private headers = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Access-Token': this.authenticationService.getToken(),
+      'Access-Control-Allow-Origin': '*'
+    }
+  };
 
-  constructor(private http: Http) { }
-
-  createAuthorizationHeader(headers: Headers) {
-    // headers.append('Content-Type', 'application/json');
+  constructor(private http: HttpClient, private authenticationService: AuthService) {
   }
 
   getCars() {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
-    return this.http.get('https://cardealer-api.herokuapp.com/car', {
-      headers: headers
-    })
-      .map(
-        (response) => {
-          return response.json().results;
-        }
-      );
+    console.log(this.headers);
+    return this.http.get<any>('https://cardealer-api.herokuapp.com/car', this.headers);
   }
 
   getACar(chassisNumber: number) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
-    return this.http.get('https://cardealer-api.herokuapp.com/car/' + chassisNumber, {
-      headers: headers
-    })
+    return this.http.get<any>('https://cardealer-api.herokuapp.com/car/' + chassisNumber, this.headers)
       .map(
         (response) => {
           return response.json().results;
@@ -41,40 +34,28 @@ export class CarService {
   }
 
   addCar(chassisNumber: number, brand: string, fuelType: string, typeCar: string) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
     return this.http.post('https://cardealer-api.herokuapp.com/car', {
       'chassisNumber': chassisNumber,
       'brand': brand,
       'fuelType': fuelType,
       'typeCar': typeCar
-    }, {
-      headers: headers
-    });
+    }, this.headers);
   }
 
   editCar(chassisNumber: number, brand: string, fuelType: string, typeCar: string) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
     return this.http.put('https://cardealer-api.herokuapp.com/car', {
       'chassisNumber': chassisNumber,
       'newBrand': brand,
       'newFuelType': fuelType,
       'newTypeCar': typeCar
-    }, {
-      headers: headers
-    });
+    }, this.headers);
   }
 
   deleteCar(chassisNumber: number) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
-    return this.http.delete('https://cardealer-api.herokuapp.com/car/' + chassisNumber);
+    return this.http.delete('https://cardealer-api.herokuapp.com/car/' + chassisNumber, this.headers);
   }
 
   addCustomer(chassisNumber: number, firstName: string, lastName: string, age: number, street: string, houseNumber: number, postalCode: string) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
     return this.http.post('https://cardealer-api.herokuapp.com/customer', {
       'chassisNumber': chassisNumber,
       'firstName': firstName,
@@ -83,14 +64,10 @@ export class CarService {
       'street': street,
       'houseNumber': houseNumber,
       'postalCode': postalCode
-    }, {
-      headers: headers
-    });
+    }, this.headers);
   }
 
   editCustomer(chassisNumber: number, firstName: string, lastName: string, age: number, street: string, houseNumber: number, postalCode: string) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
     return this.http.put('https://cardealer-api.herokuapp.com/customer', {
       'chassisNumber': chassisNumber,
       'newFirstName': firstName,
@@ -99,35 +76,21 @@ export class CarService {
       'newStreet': street,
       'newHouseNumber': houseNumber,
       'newPostalCode': postalCode
-    }, {
-      headers: headers
-    });
+    }, this.headers);
   }
 
   deleteCustomer(chassisNumber: number) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
-    return this.http.delete('https://cardealer-api.herokuapp.com/customer/' + chassisNumber, {
-      headers: headers
-    });
+    return this.http.delete('https://cardealer-api.herokuapp.com/customer/' + chassisNumber, this.headers);
   }
 
   editSoldBy(chassisNumber: number, employeeID: string) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
     return this.http.put('https://cardealer-api.herokuapp.com/car/employee', {
       'chassisNumber': chassisNumber,
       'employeeID': employeeID
-    }, {
-      headers: headers
-    });
+    }, this.headers);
   }
 
   deleteSoldBy(chassisNumber: number) {
-    const headers = new Headers();
-    this.createAuthorizationHeader(headers);
-    return this.http.delete('https://cardealer-api.herokuapp.com/car/employee/' + chassisNumber, {
-      headers: headers
-    });
+    return this.http.delete('https://cardealer-api.herokuapp.com/car/employee/' + chassisNumber, this.headers);
   }
 }

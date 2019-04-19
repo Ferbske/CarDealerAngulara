@@ -17,8 +17,8 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/signin" [routerLinkActive]="['active']" href="#">Log out</a>
+        <li>
+          <a (click)="logOut()" style="cursor: pointer"> Logout </a>
         </li>
       </ul>
     </div>

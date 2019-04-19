@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -48,6 +49,7 @@ import { AuthGuardService } from './components/auth/auth-guard.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     HttpModule
   ],
   providers: [CarService, EmployeeService, AuthService, AuthGuardService],

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import 'rxjs-compat/add/operator/map';
 import {Headers, Http} from '@angular/http';
+import {AuthService} from '../../components/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +9,11 @@ import {Headers, Http} from '@angular/http';
 
 export class EmployeeService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authenticationService: AuthService) { }
 
   createAuthorizationHeader(headers: Headers) {
-    // headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('X-Access-Token', this.authenticationService.getToken());
   }
 
   getEmployees() {

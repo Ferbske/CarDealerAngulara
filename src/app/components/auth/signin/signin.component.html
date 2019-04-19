@@ -1,19 +1,20 @@
 <div class="col-xs-12 col-sm-10 col-md-8 col-smoffset-1 col-md-offset-2 thumbnail clearfix sign">
-  <form>
-    <div class="form-group" #f>
+  <form (ngSubmit)="onLogin()" #f="ngForm">
+    <div class="form-group">
       <label for="username">Username</label>
-      <input #usernameInput type="username" id="username" name="username" ngModel class="form-control" required>
-      <span class="help-block" *ngIf="!usernameInput.valid && usernameInput.touched">Please enter a valid username</span>
+      <input type="username" id="username" name="username" ngModel class="form-control" required #username="ngModel">
+      <span class="help-block" *ngIf="!username.valid && username.touched">Please enter a valid username</span>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input #passwordInput type="password" id="password" name="password" ngModel class="form-control" required>
-      <span class="help-block" *ngIf="!passwordInput.valid && passwordInput.touched">Please enter your password</span>
+      <input type="password" id="password" name="password" ngModel class="form-control" required #password="ngModel">
+      <span class="help-block" *ngIf="!password.valid && password.touched">Please enter your password</span>
     </div>
     <div>
       <span class="alerttext" *ngIf="errorcode == 401">Please enter the right credentials</span>
     </div>
-    <button class="btn btn-primary" type="button" (click)="onLogin(usernameInput.value, passwordInput.value)">Sign in</button>
+    <button class="btn btn-primary button" type="submit" [disabled]="!f.valid">Sign in</button>
+
     <p><br/>Don't have an account yet? Please <a routerLink="/signup"> sign up</a>.</p>
   </form>
 </div>
