@@ -18,7 +18,7 @@
           routerLink="/home/{{ car.chassisNumber }}"
           [routerLinkActive]="['active']"
           href="#"
-          (click)="onSelected()"
+          (click)="onSelected(car)"
         >{{ car.chassisNumber }}</a></td>
       <td>{{ car.brand }}</td>
       <td>{{ car.fuelType }}</td>

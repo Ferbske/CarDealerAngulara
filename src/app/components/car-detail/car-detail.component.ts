@@ -1,17 +1,18 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CarModel} from '../../models/car/car.model';
 import {ActivatedRoute} from '@angular/router';
 import {CarService} from '../../models/car/car.service';
 import {Subscription} from 'rxjs';
+import {EmployeeService} from '../../models/employee/employee.service';
 
 @Component({
   selector: 'app-car-detail',
   templateUrl: './car-detail.component.html',
   styleUrls: ['./car-detail.component.css'],
-  providers: []
+  providers: [CarService]
 })
-export class CarDetailComponent implements OnInit, OnDestroy {
-  car: CarModel = {
+export class CarDetailComponent implements OnInit {
+  car = {
     'chassisNumber': 1111,
     'brand': 'Loading',
     'fuelType': 'Loading',
@@ -19,37 +20,48 @@ export class CarDetailComponent implements OnInit, OnDestroy {
     'ownedBy': null,
     'soldBy': null
   };
-  index: number;
   owner: string;
-  hasCustomer: boolean = false;
-  private subscriptionParams: Subscription;
-  private subscriptionCarService: Subscription;
+  seller: string;
 
-  constructor(private route: ActivatedRoute, private carService: CarService) {
+  constructor(private route: ActivatedRoute, private carService: CarService, private employeeService: EmployeeService) {
+    this.getCar();
   }
 
   ngOnInit() {
-    this.subscriptionParams = this.route.params.subscribe(params => {
-      this.index = params['index'];
-      this.subscriptionCarService = this.carService.getACar(this.index)
-        .subscribe(
-          (car: CarModel[]) => {
-            if (car[0].ownedBy === null) {
-              this.owner = 'Not Owned';
-              this.hasCustomer = true;
+  }
+
+  getCar() {
+    this.route.params.subscribe(param => {
+      this.carService.getACar(param['index'])
+        .subscribe((response) => {
+            this.car = response;
+            if (this.car.ownedBy != null) {
+              this.owner = this.car.ownedBy.firstName + ' ' + this.car.ownedBy.lastName;
             } else {
-              this.owner = car[0].ownedBy.firstName + ' ' + car[0].ownedBy.lastName;
-              this.hasCustomer = false;
+              this.owner = 'Not Owned';
             }
-            this.car = car[0];
+
+            console.log(response);
+            if (this.car.soldBy != null) {
+              this.employeeService.getAEmployee(this.car.soldBy)
+                .subscribe((response2) => {
+                    this.seller = response2[0].firstName + ' ' + response2[0].lastName;
+                  },
+                  (error) => {
+                    console.log(error);
+                  });
+            } else {
+              this.seller = 'Not Sold';
+            }
           },
-          (error) => console.log(error)
-        );
+          (error) => {
+            console.log(error);
+          });
     });
   }
 
   deleteCar() {
-    this.subscriptionCarService = this.carService.deleteCar(this.car.chassisNumber)
+    this.carService.deleteCar(this.car.chassisNumber)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
@@ -57,7 +69,7 @@ export class CarDetailComponent implements OnInit, OnDestroy {
   }
 
   deleteCustomer() {
-    this.subscriptionCarService = this.carService.deleteCustomer(this.car.chassisNumber)
+    this.carService.deleteCustomer(this.car.chassisNumber)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
@@ -65,15 +77,10 @@ export class CarDetailComponent implements OnInit, OnDestroy {
   }
 
   deleteSeller() {
-    this.subscriptionCarService = this.carService.deleteSoldBy(this.car.chassisNumber)
+    this.carService.deleteSoldBy(this.car.chassisNumber)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
       );
-  }
-
-  ngOnDestroy() {
-    this.subscriptionParams.unsubscribe();
-    this.subscriptionCarService.unsubscribe();
   }
 }

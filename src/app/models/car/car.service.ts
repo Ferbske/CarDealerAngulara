@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import 'rxjs-compat/add/operator/map';
 import {AuthService} from '../../components/auth/auth.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {EmployeeService} from '../employee/employee.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +12,14 @@ export class CarService {
   private headers = {
     headers: {
       'Content-Type': 'application/json',
-      'X-Access-Token': this.authenticationService.getToken(),
-      'Access-Control-Allow-Origin': '*'
+      'X-Access-Token': this.authenticationService.getToken()
     }
   };
 
-  constructor(private http: HttpClient, private authenticationService: AuthService) {
+  constructor(private http: HttpClient, private authenticationService: AuthService, private employeeService: EmployeeService) {
   }
 
   getCars() {
-    console.log(this.headers);
     return this.http.get<any>('https://cardealer-api.herokuapp.com/car', this.headers);
   }
 
@@ -28,7 +27,7 @@ export class CarService {
     return this.http.get<any>('https://cardealer-api.herokuapp.com/car/' + chassisNumber, this.headers)
       .map(
         (response) => {
-          return response.json().results;
+          return response.results[0];
         }
       );
   }

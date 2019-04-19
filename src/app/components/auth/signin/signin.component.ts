@@ -23,8 +23,8 @@ export class SigninComponent implements OnInit {
     this.authenticationService.signinUser(this.signinForm.value.username, this.signinForm.value.password)
       .subscribe(
         (response) => {
-          localStorage.setItem('Token', response.token);
           this.router.navigate(['/home']);
+          localStorage.setItem('Token', response.token);
           this.errorcode = 200;
         },
         (error) => {

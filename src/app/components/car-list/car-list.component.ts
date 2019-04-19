@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import { CarModel } from '../../models/car/car.model';
-import { CarService } from '../../models/car/car.service';
-import { Subscription } from 'rxjs';
+import {CarModel} from '../../models/car/car.model';
+import {CarService} from '../../models/car/car.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-car-list',
@@ -9,32 +9,49 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./car-list.component.css'],
   providers: []
 })
-export class CarListComponent implements OnInit, OnDestroy {
+export class CarListComponent implements OnInit {
   cars: CarModel[];
-  subscription: Subscription;
-  @Output() carSelected = new EventEmitter<void>();
+  car: CarModel;
+  @Output() carSelected = new EventEmitter<CarModel>();
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService) {
+    this.showCars();
+  }
 
   ngOnInit() {
-    // this.subscription = this.carService.getCars()
-    //   .subscribe(
-    //     (cars: CarModel[]) => {
-    //       this.cars = cars;
-    //     },
-    //     (error) => console.log(error)
-    //   );
+    // // this.subscription = this.carService.getCars()
+    // //   .subscribe(
+    // //     (cars: CarModel[]) => {
+    // //       this.cars = cars;
+    // //     },
+    // //     (error) => console.log(error)
+    // //   );
+    // this.carService.getCars()
+    //   .subscribe((res) => {
+    //     console.log(res);
+    //   });
+  }
+
+  onSelected(car: CarModel) {
+    // this.car = car;
+    this.carSelected.emit(car);
+  }
+
+  onCarCreated() {
+    this.showCars();
+  }
+
+  onCarDeleted() {
+    this.showCars();
+  }
+
+  showCars() {
     this.carService.getCars()
-      .subscribe((res) => {
-        console.log(res);
-      });
-  }
-
-  onSelected() {
-    this.carSelected.emit();
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+      .subscribe(
+        (response) => {
+          this.cars = response.results;
+        },
+        (error) => console.log(error)
+      );
   }
 }

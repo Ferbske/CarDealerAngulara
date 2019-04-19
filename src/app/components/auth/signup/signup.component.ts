@@ -19,11 +19,11 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  onRegister(){
+  onRegister() {
     this.authenticationService.signupUser(this.signupForm.value.username, this.signupForm.value.email, this.signupForm.value.password)
       .subscribe(
-        (res) => {
-          localStorage.setItem('Token', res.token);
+        (response) => {
+          localStorage.setItem('Token', response.token);
           this.router.navigate(['/home']);
           this.errorcode = 200;
         },
