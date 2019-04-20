@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AuthService} from "../auth.service";
-import {NgForm} from "@angular/forms";
+import {AuthService} from '../auth.service';
+import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
@@ -23,9 +23,9 @@ export class SigninComponent implements OnInit {
     this.authenticationService.signinUser(this.signinForm.value.username, this.signinForm.value.password)
       .subscribe(
         (response) => {
-          this.router.navigate(['/home']);
-          localStorage.setItem('Token', response.token);
+          localStorage.setItem('Token', response['token']);
           this.errorcode = 200;
+          this.router.navigate(['/home']);
         },
         (error) => {
           console.log(error);

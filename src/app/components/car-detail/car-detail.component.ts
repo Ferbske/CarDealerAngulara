@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CarModel} from '../../models/car/car.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CarService} from '../../models/car/car.service';
 import {Subscription} from 'rxjs';
 import {EmployeeService} from '../../models/employee/employee.service';
@@ -24,7 +24,7 @@ export class CarDetailComponent implements OnInit {
   seller: string;
   hasCustomer: boolean;
 
-  constructor(private route: ActivatedRoute, private carService: CarService, private employeeService: EmployeeService) {
+  constructor(private route: ActivatedRoute, private carService: CarService, private employeeService: EmployeeService, private router: Router) {
     this.getCar();
   }
 
@@ -65,7 +65,7 @@ export class CarDetailComponent implements OnInit {
   deleteCar() {
     this.carService.deleteCar(this.car.chassisNumber)
       .subscribe(
-        (response) => this.getCar(),
+        (response) => this.router.navigate(['/home']),
         (error) => console.log(error)
       );
   }
