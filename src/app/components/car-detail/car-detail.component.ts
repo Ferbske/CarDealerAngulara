@@ -47,7 +47,7 @@ export class CarDetailComponent implements OnInit {
             if (this.car.soldBy != null) {
               this.employeeService.getAEmployee(this.car.soldBy)
                 .subscribe((response2) => {
-                    this.seller = response2[0].firstName + ' ' + response2[0].lastName;
+                    this.seller = response2.firstName + ' ' + response2.lastName;
                   },
                   (error) => {
                     console.log(error);

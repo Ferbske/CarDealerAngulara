@@ -15,22 +15,18 @@ export class EmployeeService {
     }
   };
 
-  constructor(private http: HttpClient, private authenticationService: AuthService) { }
+  constructor(private http: HttpClient, private authenticationService: AuthService) {
+  }
 
   getEmployees() {
-    return this.http.get<any>('https://cardealer-api.herokuapp.com/employee', this.headers)
-      .map(
-        (response) => {
-          return response.results;
-        }
-      );
+    return this.http.get<any>('https://cardealer-api.herokuapp.com/employee', this.headers);
   }
 
   getAEmployee(id: string) {
     return this.http.get<any>('https://cardealer-api.herokuapp.com/employee/' + id, this.headers)
       .map(
         (response) => {
-          return response.results;
+          return response.results[0];
         }
       );
   }
@@ -44,7 +40,7 @@ export class EmployeeService {
     }, this.headers);
   }
 
-  editEmployee(id: string, firstName: string, lastName: string, department: string, job: string){
+  editEmployee(id: string, firstName: string, lastName: string, department: string, job: string) {
     return this.http.put('https://cardealer-api.herokuapp.com/employee', {
       'employeeID': id,
       'newFirstName': firstName,

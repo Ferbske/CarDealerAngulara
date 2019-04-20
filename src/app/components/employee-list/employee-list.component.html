@@ -6,7 +6,6 @@
     <table class="table table-hover">
       <thead>
       <th>Index</th>
-      <th>ID</th>
       <th>First Name</th>
       <th>Last Name</th>
       </thead>
@@ -22,10 +21,9 @@
             href="#"
             (click)="onSelected()"
           >
-            {{ employee._id }}
+            {{ employee.firstName }}
           </a>
         </td>
-        <td>{{ employee.firstName }}</td>
         <td>{{ employee.lastName }}</td>
       </tr>
       </tbody>

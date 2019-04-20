@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EmployeeModel} from '../../models/employee/employee.model';
 import {EmployeeService} from '../../models/employee/employee.service';
 import {CarService} from '../../models/car/car.service';
@@ -10,40 +9,36 @@ import {CarService} from '../../models/car/car.service';
   templateUrl: './sold-by-edit.component.html',
   styleUrls: ['./sold-by-edit.component.css']
 })
-export class SoldByEditComponent implements OnInit, OnDestroy {
+export class SoldByEditComponent implements OnInit {
   index: number;
-  employeeID: string;
   employees: EmployeeModel[];
-  private subscriptionParams: Subscription;
-  private subscriptionEmployee: Subscription;
-  private subscriptionCar: Subscription;
+  employeeID: string;
 
-  constructor(private route: ActivatedRoute, private employeeService: EmployeeService, private carService: CarService) {
-  }
-
-  ngOnInit() {
-    this.subscriptionParams = this.route.params.subscribe(params => {
+  constructor(private route: ActivatedRoute, private employeeService: EmployeeService, private carService: CarService, private router: Router) {
+    this.getEmployees();
+    this.route.params.subscribe(params => {
       this.index = params['index'];
-      this.subscriptionEmployee = this.employeeService.getEmployees()
-        .subscribe(
-          (employees: EmployeeModel[]) => {
-            this.employees = employees;
-          },
-          (error) => console.log(error)
-        );
     });
   }
 
-  onSubmitEditSoldBy() {
-    this.subscriptionCar = this.carService.editSoldBy(this.index, this.employeeID)
+  ngOnInit() {
+  }
+
+  getEmployees() {
+    this.employeeService.getEmployees()
       .subscribe(
-        (response) => console.log(response),
+        (response) => {
+          this.employees = response.results;
+        },
         (error) => console.log(error)
       );
   }
 
-  ngOnDestroy() {
-    this.subscriptionParams.unsubscribe();
-    this.subscriptionEmployee.unsubscribe();
+  onSubmitEditSoldBy(id) {
+    this.carService.editSoldBy(this.index, id)
+      .subscribe(
+        (response) => this.router.navigate(['/home']),
+        (error) => console.log(error)
+      );
   }
 }

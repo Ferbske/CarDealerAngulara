@@ -1,16 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CustomerModel} from '../../models/customer/customer.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
 import {CarService} from '../../models/car/car.service';
-import {CarModel} from '../../models/car/car.model';
 
 @Component({
   selector: 'app-car-customer-edit',
   templateUrl: './car-customer-edit.component.html',
   styleUrls: ['./car-customer-edit.component.css']
 })
-export class CarCustomerEditComponent implements OnInit, OnDestroy {
+export class CarCustomerEditComponent implements OnInit {
   index: number;
   customer: CustomerModel = {
     'firstName': 'Loading',
@@ -55,8 +53,7 @@ export class CarCustomerEditComponent implements OnInit, OnDestroy {
   onSubmitEditCustomer() {
     this.carService.editCustomer(this.index, this.customer.firstName, this.customer.lastName, this.customer.age, this.customer.street, this.customer.houseNumber, this.customer.postalCode)
       .subscribe(
-        (response) => this.router.navigate(['/home'],
-        (error) => console.log(error)
-      ));
+        (response) => this.router.navigate(['/home']
+        ));
   }
 }

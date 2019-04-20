@@ -1,37 +1,17 @@
 <div class="row">
   <div class="col-md-5">
     <h1>Chassis Number: {{ index }}</h1>
-    <p>Employee ID:</p>
-    <input id="employeeID" name="employeeID" class="form-control"
-           required
-           [(ngModel)]="employeeID" #employeeIDInput="ngModel" >
-
-    <div *ngIf="employeeIDInput.invalid && (employeeIDInput.dirty || employeeIDInput.touched)"
-         class="alert alert-danger">
-      <div *ngIf="employeeIDInput.errors.required">
-        Employee ID is required.
-      </div>
-    </div>
+    <p>Employee:</p>
+    <select id="employeeID" name="employeeID" class="form-control"
+            required
+            [(ngModel)]="employeeID" #employeeIDInput="ngModel">
+      <option value="Select">Select an Employee</option>
+      <option *ngFor="let employee of employees" value="{{ employee._id }}">
+        {{ employee.firstName + ' ' + employee.lastName }}
+      </option>
+    </select>
     <br>
     <button class="btn btn-primary"
-            [disabled]="employeeIDInput.invalid"
-            (click)="onSubmitEditSoldBy()">Edit Seller</button>
-  </div>
-  <div class="col-md-7">
-    <table class="table table-hover">
-      <thead>
-      <th>ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      </thead>
-      <tbody>
-      <tr
-        *ngFor="let employee of employees">
-        <td>{{ employee._id }}</td>
-        <td>{{ employee.firstName }}</td>
-        <td>{{ employee.lastName }}</td>
-      </tr>
-      </tbody>
-    </table>
+            (click)="onSubmitEditSoldBy(employeeID)">Edit Seller</button>
   </div>
 </div>

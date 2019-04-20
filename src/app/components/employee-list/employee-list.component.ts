@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {EmployeeModel} from '../../models/employee/employee.model';
-import {Subscription} from 'rxjs';
 import {EmployeeService} from '../../models/employee/employee.service';
 
 @Component({
@@ -8,28 +7,29 @@ import {EmployeeService} from '../../models/employee/employee.service';
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css']
 })
-export class EmployeeListComponent implements OnInit, OnDestroy {
+export class EmployeeListComponent implements OnInit {
   employees: EmployeeModel[];
-  subscription: Subscription;
   showDetails: boolean;
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService) {
+    this.showEmployees();
+    this.showDetails = false;
+  }
 
   ngOnInit() {
-    this.subscription = this.employeeService.getEmployees()
-      .subscribe(
-        (employees: EmployeeModel[]) => {
-          this.employees = employees;
-        },
-        (error) => console.log(error)
-      );
   }
 
   onSelected() {
     this.showDetails = true;
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  showEmployees() {
+    this.employeeService.getEmployees()
+      .subscribe(
+        (response) => {
+          this.employees = response.results;
+        },
+        (error) => console.log(error)
+      );
   }
 }

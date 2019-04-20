@@ -31,8 +31,7 @@ export class CarCustomerComponent implements OnInit {
   onSubmitAddCustomer() {
     this.carService.addCustomer(this.index, this.firstName, this.lastName, this.age, this.street, this.houseNumber, this.postalCode)
       .subscribe(
-        (response) => this.router.navigate(['/home'],
-          (error) => console.log(error)
+        (response) => this.router.navigate(['/home']
         ));
   }
 

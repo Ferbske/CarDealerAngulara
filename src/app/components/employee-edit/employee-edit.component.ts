@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EmployeeModel} from '../../models/employee/employee.model';
 import {Subscription} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EmployeeService} from '../../models/employee/employee.service';
 
 @Component({
@@ -9,27 +9,27 @@ import {EmployeeService} from '../../models/employee/employee.service';
   templateUrl: './employee-edit.component.html',
   styleUrls: ['./employee-edit.component.css']
 })
-export class EmployeeEditComponent implements OnInit, OnDestroy {
-  index: string;
-  employee: EmployeeModel = {
+export class EmployeeEditComponent implements OnInit {
+  employee = {
+    '_id': 'null',
     'firstName': 'Loading',
     'lastName': 'Loading',
     'department': 'Loading',
     'job': 'Loading'
   };
-  private subscriptionParams: Subscription;
-  private subscriptionEmployeeService: Subscription;
 
-  constructor(private route: ActivatedRoute, private employeeService: EmployeeService) {
+  constructor(private route: ActivatedRoute, private employeeService: EmployeeService, private router: Router) {
+    this.getAEmployee();
   }
 
   ngOnInit() {
-    this.subscriptionParams = this.route.params.subscribe(params => {
-      this.index = params['index'];
-      this.subscriptionEmployeeService = this.employeeService.getAEmployee(this.index)
-        .subscribe(
-          (employee: EmployeeModel[]) => {
-            this.employee = employee[0];
+  }
+
+  getAEmployee() {
+    this.route.params.subscribe(param => {
+      this.employeeService.getAEmployee(param['index'])
+        .subscribe((response) => {
+            this.employee = response;
           },
           (error) => console.log(error)
         );
@@ -37,14 +37,9 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmitEditEmployee() {
-    this.subscriptionEmployeeService = this.employeeService.editEmployee(this.index, this.employee.firstName, this.employee.lastName, this.employee.department, this.employee.job)
+    this.employeeService.editEmployee(this.employee._id, this.employee.firstName, this.employee.lastName, this.employee.department, this.employee.job)
       .subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
-      );
-  }
-
-  ngOnDestroy() {
-    this.subscriptionParams.unsubscribe();
+        (response) => this.router.navigate(['/employee']
+        ));
   }
 }

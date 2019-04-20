@@ -19,30 +19,10 @@ export class CarListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // // this.subscription = this.carService.getCars()
-    // //   .subscribe(
-    // //     (cars: CarModel[]) => {
-    // //       this.cars = cars;
-    // //     },
-    // //     (error) => console.log(error)
-    // //   );
-    // this.carService.getCars()
-    //   .subscribe((res) => {
-    //     console.log(res);
-    //   });
   }
 
   onSelected(car: CarModel) {
-    // this.car = car;
     this.carSelected.emit(car);
-  }
-
-  onCarCreated() {
-    this.showCars();
-  }
-
-  onCarDeleted() {
-    this.showCars();
   }
 
   showCars() {
