@@ -24,18 +24,18 @@
     {{ seller }}
   </div>
   <div class="col-sm-12">
-    <button class="btn btn-primary" routerLink="/car/edit/{{ index }}">Edit Car</button>
+    <button class="btn btn-primary" routerLink="/car/edit/{{ car.chassisNumber }}">Edit Car</button>
     <br>
     <button class="btn btn-danger" (click)="deleteCar()">Delete Car</button>
     <br>
-    <button *ngIf="hasCustomer; else editCustomer" class="btn btn-primary" routerLink="/car/customer/{{ car.chassisNumber }}">Add Customer</button>
+    <button *ngIf="hasCustomer; else editCustomer" class="btn btn-primary" routerLink="/car/customer/{{ car.chassisNumber }}">Add Owner</button>
     <ng-template #editCustomer>
-      <button class="btn btn-primary" routerLink="/car/customer/edit/{{ index }}">Edit Owner</button>
+      <button class="btn btn-primary" routerLink="/car/customer/edit/{{ car.chassisNumber }}">Edit Owner</button>
     </ng-template>
     <br>
     <button class="btn btn-danger" (click)="deleteCustomer()">Delete Owner</button>
     <br>
-    <button class="btn btn-primary" routerLink="/car/soldby/{{ index }}">Edit Seller</button>
+    <button class="btn btn-primary" routerLink="/car/soldby/{{ car.chassisNumber }}">Edit Seller</button>
     <br>
     <button class="btn btn-danger" (click)="deleteSeller()">Delete Seller</button>
   </div>

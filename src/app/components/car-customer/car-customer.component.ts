@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CarService} from '../../models/car/car.service';
 
 @Component({
@@ -9,7 +8,7 @@ import {CarService} from '../../models/car/car.service';
   styleUrls: ['./car-customer.component.css'],
   providers: []
 })
-export class CarCustomerComponent implements OnInit, OnDestroy {
+export class CarCustomerComponent implements OnInit {
   index: number;
   firstName: string;
   lastName: string;
@@ -17,26 +16,24 @@ export class CarCustomerComponent implements OnInit, OnDestroy {
   street: string;
   houseNumber: number;
   postalCode: string;
-  private subscriptionParams: Subscription;
-  private subscriptionCarService: Subscription;
   inputsEmpty: boolean = true;
 
-  constructor(private route: ActivatedRoute, private carService: CarService) {
+  constructor(private route: ActivatedRoute, private carService: CarService, private router: Router) {
     this.check();
   }
 
   ngOnInit() {
-    this.subscriptionParams = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.index = params['index'];
     });
   }
 
   onSubmitAddCustomer() {
-    this.subscriptionCarService = this.carService.addCustomer(this.index, this.firstName, this.lastName, this.age, this.street, this.houseNumber, this.postalCode)
+    this.carService.addCustomer(this.index, this.firstName, this.lastName, this.age, this.street, this.houseNumber, this.postalCode)
       .subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
-      );
+        (response) => this.router.navigate(['/home'],
+          (error) => console.log(error)
+        ));
   }
 
   check() {
@@ -48,10 +45,5 @@ export class CarCustomerComponent implements OnInit, OnDestroy {
         this.check();
       }
     }, 100);
-  }
-
-  ngOnDestroy() {
-    // this.subscriptionCarService.unsubscribe();
-    // this.subscriptionParams.unsubscribe();
   }
 }

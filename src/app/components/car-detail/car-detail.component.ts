@@ -22,6 +22,7 @@ export class CarDetailComponent implements OnInit {
   };
   owner: string;
   seller: string;
+  hasCustomer: boolean;
 
   constructor(private route: ActivatedRoute, private carService: CarService, private employeeService: EmployeeService) {
     this.getCar();
@@ -37,11 +38,12 @@ export class CarDetailComponent implements OnInit {
             this.car = response;
             if (this.car.ownedBy != null) {
               this.owner = this.car.ownedBy.firstName + ' ' + this.car.ownedBy.lastName;
+              this.hasCustomer = false;
             } else {
+              this.hasCustomer = true;
               this.owner = 'Not Owned';
             }
 
-            console.log(response);
             if (this.car.soldBy != null) {
               this.employeeService.getAEmployee(this.car.soldBy)
                 .subscribe((response2) => {
@@ -63,7 +65,7 @@ export class CarDetailComponent implements OnInit {
   deleteCar() {
     this.carService.deleteCar(this.car.chassisNumber)
       .subscribe(
-        (response) => console.log(response),
+        (response) => this.getCar(),
         (error) => console.log(error)
       );
   }
@@ -71,7 +73,7 @@ export class CarDetailComponent implements OnInit {
   deleteCustomer() {
     this.carService.deleteCustomer(this.car.chassisNumber)
       .subscribe(
-        (response) => console.log(response),
+        (response) => this.getCar(),
         (error) => console.log(error)
       );
   }
@@ -79,7 +81,7 @@ export class CarDetailComponent implements OnInit {
   deleteSeller() {
     this.carService.deleteSoldBy(this.car.chassisNumber)
       .subscribe(
-        (response) => console.log(response),
+        (response) => this.getCar(),
         (error) => console.log(error)
       );
   }

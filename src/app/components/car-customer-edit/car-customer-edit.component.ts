@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CustomerModel} from '../../models/customer/customer.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {CarService} from '../../models/car/car.service';
 import {CarModel} from '../../models/car/car.model';
@@ -20,34 +20,43 @@ export class CarCustomerEditComponent implements OnInit, OnDestroy {
     'houseNumber': 99999,
     'postalCode': 'Loading'
   };
-  private subscriptionParams: Subscription;
-  private subscriptionCarService: Subscription;
 
-  constructor(private route: ActivatedRoute, private carService: CarService) { }
+  constructor(private route: ActivatedRoute, private carService: CarService, private router: Router) {
+    this.getCar();
+    // this.subscriptionParams = this.route.params.subscribe(params => {
+    //   this.index = params['index'];
+    //   this.subscriptionCarService = this.carService.getACar(this.index)
+    //     .subscribe(
+    //       (car: CarModel[]) => {
+    //         const carSelected = car[0];
+    //         this.customer = carSelected.ownedBy;
+    //       },
+    //       (error) => console.log(error)
+    //     );
+    // });
+  }
 
   ngOnInit() {
-    this.subscriptionParams = this.route.params.subscribe(params => {
-      this.index = params['index'];
-      this.subscriptionCarService = this.carService.getACar(this.index)
-        .subscribe(
-          (car: CarModel[]) => {
-            const carSelected = car[0];
-            this.customer = carSelected.ownedBy;
+  }
+
+  getCar() {
+    this.route.params.subscribe(param => {
+      this.index = param['index'];
+      this.carService.getACar(this.index)
+        .subscribe((response) => {
+            this.customer = response.ownedBy;
           },
-          (error) => console.log(error)
-        );
+          (error) => {
+            console.log(error);
+          });
     });
   }
 
   onSubmitEditCustomer() {
-    this.subscriptionCarService = this.carService.editCustomer(this.index, this.customer.firstName, this.customer.lastName, this.customer.age, this.customer.street, this.customer.houseNumber, this.customer.postalCode)
+    this.carService.editCustomer(this.index, this.customer.firstName, this.customer.lastName, this.customer.age, this.customer.street, this.customer.houseNumber, this.customer.postalCode)
       .subscribe(
-        (response) => console.log(response),
+        (response) => this.router.navigate(['/home'],
         (error) => console.log(error)
-      );
-  }
-
-  ngOnDestroy() {
-    this.subscriptionParams.unsubscribe();
+      ));
   }
 }
